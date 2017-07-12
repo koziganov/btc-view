@@ -1,0 +1,162 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.x-tab.x-tab-active.x-tab-default .x-tab-inner {
+  color: #04408c !important;
+  font-weight: bold;
+  //background-color:black;
+  //text-decoration: underline !important;
+  //text-shadow: 0 0 10px #ff4ac7,0 0 20px #1b1b1b,0 0 30px #1b1b1b,0 0 40px #ff4ac7;
+
+}
+
+.summary {
+  background-color:red !important;
+  color: #416da3;
+  font-weight: bold;
+}
+
+.icon-cfg {
+  background-image: url(../img/cfg.png)
+}
+
+.icon-search-btn {
+  background-image: url(../img/search.png)
+}
+
+.icon-download-btn {
+  background-image: url(../img/download.png)
+}
+
+.icon-print-btn {
+  background-image: url(../img/print.png)
+}
+
+.icon-add-list {
+  background-image: url(../img/add_list.png)
+}
+
+.icon-edit-list {
+  background-image: url(../img/edit_list.png)
+}
+
+.icon-save-btn {
+  background-image: url(../img/save.png)
+}
+
+.icon-save2-btn {
+  background-image: url(../img/save2.png)
+}
+
+.icon-cancel-btn {
+  background-image: url(../img/cancel.png)
+}
+
+.icon-table-btn {
+  background-image: url(../img/table.png)
+}
+
+.icon-document-btn {
+  background-image: url(../img/document.png)
+}
+
+.icon-documents-btn {
+  background-image: url(../img/documents.png)
+}
+
+.icon-clear-btn {
+  background-image: url(../img/clear.png)
+}
+
+.icon-pipette-btn {
+  background-image: url(../img/pipette.png)
+}
+
+.icon-interact-btn {
+  background-image: url(../img/interact.png)
+}
+
+.icon-up-btn {
+  background-image: url(../img/up.png)
+}
+
+.icon-ready-btn {
+  background-image: url(../img/ready.png)
+}
+
+.icon-plus-btn {
+  background-image: url(../img/plus.png)
+}
+
+.icon-minus-btn {
+  background-image: url(../img/minus.png)
+}
+
+
+
+.icon-gray {
+  background-image: url(../img/circle_gray.png);
+  background-repeat: no-repeat;
+}
+
+.icon-yellow {
+  background-image: url(../img/circle_yellow.png);
+  background-repeat: no-repeat;
+}
+
+.icon-blue {
+  background-image: url(../img/circle_blue.png);
+  background-repeat: no-repeat;
+}
+
+.icon-green {
+  background-image: url(../img/circle_green.png);
+  background-repeat: no-repeat;
+}
+
+.icon-alert {
+  background-image: url(../img/alert.png);
+  background-repeat: no-repeat;
+}
+
+.icon-barcode {
+  background-image: url(../img/barcode.png);
+  background-repeat: no-repeat;
+}
+
+
+.emp_err .x-grid-cell, .emp_err {
+  background-color: #ffe2e2;
+}
+
+.emp_empty .x-grid-cell, .emp_empty {
+//background-color: #e2ffff;
+//color: #900;
+//color: gray;
+  background-color: #ffffe2;
+}
+
+.emp_loaded .x-grid-cell, .emp_loaded {
+  background-color: #e2ffe2;
+  background-image:none;
+}
+
+.patient-full-row .x-grid-cell {
+  background-color: #e2ffe2;
+}
+
+.patient-medium-row .x-grid-cell {
+  background-color: #f1efa2;
+}
+
+.help-row {
+  margin-bottom:10px;
+  padding-left: 20px;
+  min-height:18px;
+}
