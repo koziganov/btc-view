@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <style>
+
+         body {
+           font: 12px sans-serif;
+           color: lightgray;
+         }
+
+         .domain {
+             stroke: lightgray;
+         }
+         .tick line {
+             stroke: #eee;
+         }
+
+         .tick line:hover {
+             stroke: orange;
+         }
+
+         .axis {
+             fill: lightgray;
+         }
+
+         .axis path,
+         .axis line {
+           fill: none;
+           stroke: lightgray;
+           shape-rendering: crispEdges;
+         }
+
+         .x.axis path {
+           //display: none;
+         }
+
+         .x.axis  {
+             cursor: pointer;
+             fill: lightblue;
+         }
+
+         .area.above {
+           fill: rgb(252,141,89);
+         }
+
+         .area.below {
+           fill: rgb(145,207,96);
+         }
+
+         .line.l1 {
+           fill: steelblue;
+           stroke: lightgray;
+           stroke-width: 1.5px;
+           fill-opacity: 0.3;
+           opacity: 0.3;
+         }
+
+         .line.l2 {
+             fill: red;
+             stroke: lightgray;
+             stroke-width: 1.5px;
+             fill-opacity: 0.3;
+             opacity: 0.3;
+         }
+
+         .line.l3 {
+             fill: none;
+             stroke: #fd8a7b;
+             opacity: 0.3;
+             stroke-width: 0.5px;
+
+         }
+
+         .line.l4 {
+             fill: none;
+             stroke: lightblue;
+             opacity: 0.3;
+             stroke-width: 0.5px;
+
+         }
+
+         .active {
+             background-color: lightblue;
+         }
+
+         .tools {
+             margin-left: 125px;
+         }
+
+         #points {
+             display: flex;
+             margin-top: 15px;
+             margin-left: 125px;
+         }
+
+         #is_points {
+             //display: flex;
+         }
+
+         #marketcap {
+             display: inline;
+             color: #2a6d9e;
+         }
+
+         #coin_info {
+             display: inline;
+             float: right;
+             color: #2a6d9e;
+             margin-right: 100px;
+         }
+
+         .points-table {
+             margin: 10px;
+             border-collapse: collapse;
+             color: lightseagreen;
+         }
+
+         .points-table td {
+             border:1px solid lightseagreen;
+             padding: 3px;
+         }
+
+         .point {
+             z-index: 999;
+             fill: white;
+             stroke-width: 3px;
+         }
+
+         .point.active {
+             fill: #6cadf2;
+         }
+
+         .point-text {
+             font-weight: bold;
+         }
+
+
+
+        </style>
+
+    </head>
+    <body>
+        <script src=jquery.js></script>
+        <script src="d3.v3.min.js"></script>
+        <script src="graph.js"></script>
+        <script src="marketcap.js"></script>
+
+
+        <div class="tools">period:
+            <input type="button" m="60" value="1h">
+            <input type="button" m="120" value="2h">
+            <input type="button" m="240" value="4h">
+            <input type="button" m="480" value="8h">
+            <input type="button" m="1440" value="1d">
+            <input type="button" m="4320" value="3d">
+            <input type="button" m="10080" value="1w">
+            <input type="button" m="20160" value="2w" class="active">
+            <input type="button" m="44640" value="1m">
+
+            &nbsp;candle:
+            <input type="button" v="300" value="5m">
+            <input type="button" v="900" value="15m">
+            <input type="button" v="1800" value="30m">
+            <input type="button" v="7200" value="1h" class="active">
+            <input type="button" v="14400" value="2h">
+            <input type="button" v="86400" value="1d">
+
+            &nbsp;coin:
+            <input type="button" c="XEM" value="XEM" class="active">
+            <input type="button" c="LTC" value="LTC">
+            <input type="button" c="ETC" value="ETC">
+            <input type="button" c="ETH" value="ETH">
+
+            <label style="cursor:pointer"><input type="checkbox" id="interpolate">&nbsp;interpolate</label>
+            <label style="cursor:pointer"><input type="checkbox" id="is_points">&nbsp;points</label>
+
+        </div>
+        <div id="points"></div>
+
+        <!-- <svg width="960" height="500"></svg> -->
+    </body>
+</html>
