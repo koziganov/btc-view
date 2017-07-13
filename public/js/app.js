@@ -123,6 +123,7 @@ Ext.onReady(function () {
                     var start=trades_data[0].timestamp;
                     var orders=0;
                     var value=0;
+                    var value_type=0;
 
                     for(var k=0;k<trades_data.length;k++){
                         var rec=trades_data[k];
@@ -131,11 +132,16 @@ Ext.onReady(function () {
                         }
                         orders++;
                         value+=rec.amount;
+                        if (rec.type=='bid'){
+                            value_type=value_type+rec.amount;
+                        } else {
+                            value_type=value_type-rec.amount;
+                        }
                     }
                     //var dt=new Date(value*1000);
-                    var f1=trades_grid.down('displayfield').setValue(orders+' o/m');
+                    var f1=trades_grid.down('displayfield').setValue(round(value_type,2)+' v+/m');
                     var p=f1.next().next().setValue(trades_data[0].price);
-                    p.next().next().setValue(round(value,4)+' v/m');
+                    p.next().next().setValue(round(value,2)+' v/m');
                 }
                 trades_tab(trades_grid,trades_data);
 
