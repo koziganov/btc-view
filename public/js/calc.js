@@ -221,9 +221,11 @@ function change_percent(target_percent,id){
 
     var deep_cur=0;
 
+
+
     if (is_asks(id)) {
 
-        var first_price=data[data.length-1].data.price;
+        var first_price=parseFloat(data[data.length-1].data.price);
         var target_price=first_price+first_price*target_percent/100;
 
         for (var k = data.length-1; k>=0 ; k--) {
@@ -239,7 +241,7 @@ function change_percent(target_percent,id){
         }
 
     } else {
-        var first_price=data[0].data.price;
+        var first_price=parseFloat(data[0].data.price);
         var target_price=first_price-first_price*target_percent/100;
 
         for (var k = 0; k<data.length; k++) {
@@ -256,8 +258,10 @@ function change_percent(target_percent,id){
 
     }
 
+    //console.log(target_percent,first_price,target_price);
+
     //price
-    target_price=round(target_price,3);
+    target_price=round(target_price,parseInt(target_price)==0 ? 8 : 3 );
     Ext.getCmp(id+'price').setValue(target_price);
 
     //%vls
