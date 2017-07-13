@@ -44,7 +44,7 @@ router.all('/', function(req, res, next) {
         var d=parseInt((((new Date()).getTime())-1000*60*4)/1000);
         pairs=('/public?command=[method]&currencyPair=[pair]&start='+d+'&end=9999999999').replace('\[method\]',req.query.method).replace('\[pair\]',req.query.pair);
     } else { //orders
-        pairs='/public?command=[method]&currencyPair=[pair]&depth=100'.replace('\[method\]',req.query.method).replace('\[pair\]',req.query.pair);
+        pairs='/public?command=[method]&currencyPair=[pair]&depth=300'.replace('\[method\]',req.query.method).replace('\[pair\]',req.query.pair);
     }
 
     //res.send(pairs)

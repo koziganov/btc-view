@@ -5,7 +5,7 @@
 
 
 var glob={
-    tick_interval:60000, //!!
+    tick_interval:15000, //!!
     remove_delay:300,
     trade_percent_asks:20, //ордера на продажу: на сколько заглядывать в стаканы (по value) для установки цены продажи
     trade_percent_bids:20, //ордера на закупку: на сколько заглядывать в стаканы (по value) для установки цены покупки
@@ -90,8 +90,10 @@ Ext.onReady(function () {
                 id="asks"+pair_id;
                 var asks_grid=Ext.getCmp(id);
                 var asks_data=arr_process(glob.orders[pair_id].asks);
-                var d=diff(glob.asks,asks_data,["id","_status"]);
-                glob.asks=asks_data;
+                var d=diff(glob[id] || [],asks_data,["id","_status"]);
+                glob[id]=asks_data;
+                //console.log(id,"asks_data2",asks_data,glob.asks);
+
 
                 if (!asks_grid){
                     asks_grid=Ext.create('Ext.grid.Panel', get_orders_cfg(pair_id,[],grid_title,id,'desc'));
@@ -128,10 +130,10 @@ Ext.onReady(function () {
                 var bids_grid=Ext.getCmp(id);
 
                 var bids_data=arr_process(glob.orders[pair_id].bids);
-                var d=diff(glob.bids,bids_data,["id","_status"]);
+                var d=diff(glob[id] || [],bids_data,["id","_status"]);
                 //console.log("diff",d);
 
-                glob.bids=bids_data;
+                glob[id]=bids_data;
 
                 if (!bids_grid) {
                     bids_grid=Ext.create('Ext.grid.Panel', get_orders_cfg(pair_id,[],grid_title,id,'desc'));
@@ -184,10 +186,9 @@ Ext.onReady(function () {
 
         function add_changes_to_grid(grid,changes,title){
 
-            //console.log("changes",changes);
-
             var id=grid.id;
             //var pair_arr=pair_id.replace(/asks|bids/,"").split("_");
+            //console.log(id, "changes", changes);
 
             var store=grid.getStore();
 
@@ -199,11 +200,12 @@ Ext.onReady(function () {
                 for(var j=0;j<store.data.count();j++){
                     var rec=store.data.items[j].data;
                     if (rec.price==rec_for_remove.price && rec.value==rec_for_remove.value) {
-                        store_records_for_remove.push(store.data.items[j]);
+                        //store_records_for_remove.push(store.data.items[j]);
 
                         var record=store.getAt(j);
                         //var record=store.getById(store.data.items[j].id);
                         record.set("_status","old");
+                        store_records_for_remove.push(record);
 
                         j=store.data.count(); //exit for
                     }
@@ -213,9 +215,17 @@ Ext.onReady(function () {
             //удаляем с задержкой+после удаления добавляем новые элементы
             setTimeout(function(store,vls){
                 store.remove(vls);
+
                 if (store.data.count()==0){ //при первом заполнении стора добавляем changes.eq (чтобы не красилось в зелёный)
                     store.add(changes.eq);
                 }
+
+                /*
+                if (changes.old.length==0){
+                    store.removeAll();
+                }
+                */
+
                 store.add(changes.new);
 
                 var data=changes.new.concat(changes.eq);
@@ -232,9 +242,9 @@ Ext.onReady(function () {
                     val+=rec.value;
                 }
 
-                val=Math.round(val*100000)/100000;
+                val=round(val,2);
 
-                grid.setTitle(title+" ["+min+"-"+max+"] v:"+val);
+                grid.setTitle(title+" ["+min+"-"+max+"] v:"+beautify_number(val));
 
 
                 /*
@@ -577,6 +587,9 @@ Ext.onReady(function () {
                     if (!glob.ticker) {
                         clearInterval(glob.ticker)
                     }
+
+                    glob.asks=[];
+                    glob.bids=[];
 
                     /*
                     var old_id=oldTab.id;

@@ -3,6 +3,8 @@
  */
 function diff(old_arr,new_arr,exclude_fields){
 
+    //console.warn(old_arr[0],new_arr[0])
+
     if (old_arr.length==0) {
         return {
             "old": [],
@@ -32,12 +34,17 @@ function diff(old_arr,new_arr,exclude_fields){
             var old_elem=this.old_arr[this.old_arr_pointer];
             var new_elem=this.new_arr[this.new_arr_pointer];
 
-            if (exclude_fields) {
+            if (typeof exclude_fields !='undefined') {
                 for(var k=0;k<exclude_fields.length;k++){
                     var exclude_field=exclude_fields[k];
                     delete old_elem[exclude_field];
                     delete new_elem[exclude_field]
                 }
+            }
+
+            //tmp
+            if (JSON.stringify(old_elem,null,"\t")!=JSON.stringify(new_elem,null,"\t")) {
+                //console.warn(old_arr,new_arr,JSON.stringify(old_elem,null,"\t"),JSON.stringify(new_elem,null,"\t"))
             }
 
             return JSON.stringify(old_elem,null,"\t")==JSON.stringify(new_elem,null,"\t");
@@ -52,7 +59,7 @@ function diff(old_arr,new_arr,exclude_fields){
             var new_elem=this.new_arr[this.new_arr_pointer];
 
 
-            if (exclude_fields) {
+            if (typeof exclude_fields !='undefined') {
                 for(var k=0;k<exclude_fields.length;k++){
                     var exclude_field=exclude_fields[k];
                     delete old_elem[exclude_field];

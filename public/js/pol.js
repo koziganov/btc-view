@@ -125,8 +125,8 @@ Ext.onReady(function () {
                 var asks_grid=Ext.getCmp(id);
                 var asks_data=arr_process(glob.orders.asks);
 
-                var d=diff(glob.asks,asks_data,["id","_status"]);
-                glob.asks=asks_data;
+                var d=diff(glob[id] || [],asks_data,["id","_status"]);
+                glob[id]=asks_data;
                 //asks_grid.destroy();
 
                 if (!asks_grid) {
@@ -169,10 +169,10 @@ Ext.onReady(function () {
                 var bids_grid=Ext.getCmp(id);
 
                 var bids_data=arr_process(glob.orders.bids);
-                var d=diff(glob.bids,bids_data,["id","_status"]);
+                var d=diff(glob[id] || [],bids_data,["id","_status"]);
                 //console.log("diff",d);
 
-                glob.bids=bids_data;
+                glob[id]=bids_data;
 
                 if (!bids_grid) {
                     bids_grid=Ext.create('Ext.grid.Panel', get_orders_cfg(pair_id,[],grid_title,id,'desc'));
@@ -273,9 +273,9 @@ Ext.onReady(function () {
                     val+=rec.value;
                 }
 
-                val=Math.round(val*100000)/100000;
+                val=round(val,2);
 
-                grid.setTitle(title+" ["+min+"-"+max+"] v:"+val);
+                grid.setTitle(title+" ["+min+"-"+max+"] v:"+beautify_number(val));
 
 
                 /*

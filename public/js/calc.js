@@ -78,7 +78,7 @@ function change_price(target_price,id){
     Ext.getCmp(id+'vls_percent').setValue(vls_percent);
 
     deep_cur=round(deep_cur,2);
-    Ext.getCmp(id+'vls_percent').next().setValue("%vls <b>"+beautify_number(deep_cur)+"</b> "+pair_arr[1]);
+    Ext.getCmp(id+'vls_percent').next().setValue("%vls <b>"+beautify_number(deep_cur)+"</b> "+pair_arr[0]);
 
     //%dif
     var diff=Math.abs(first_price-target_price); //разница цены
@@ -172,7 +172,7 @@ function change_vls_percent(target_vls_percent,id){
     //%vls
     Ext.getCmp(id+'vls_percent').setValue(target_vls_percent);
     deep_cur=round(deep_cur,2);
-    Ext.getCmp(id+'vls_percent').next().setValue("%vls <b>"+beautify_number(deep_cur)+"</b> "+pair_arr[1]);
+    Ext.getCmp(id+'vls_percent').next().setValue("%vls <b>"+beautify_number(deep_cur)+"</b> "+pair_arr[0]);
 
     //%dif
     var diff=Math.abs(first_price-price); //разница цены
@@ -265,7 +265,7 @@ function change_percent(target_percent,id){
     vls_percent=round(vls_percent,3);
     Ext.getCmp(id+'vls_percent').setValue(vls_percent);
     deep_cur=round(deep_cur,2);
-    Ext.getCmp(id+'vls_percent').next().setValue("%vls <b>"+beautify_number(deep_cur)+"</b> "+pair_arr[1]);
+    Ext.getCmp(id+'vls_percent').next().setValue("%vls <b>"+beautify_number(deep_cur)+"</b> "+pair_arr[0]);
 
     //%dif
     Ext.getCmp(id+'diff_percent').setValue(target_percent);
