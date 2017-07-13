@@ -41,7 +41,7 @@ router.all('/', function(req, res, next) {
     if (req.query.method=='returnTicker'){ //coin list
         pairs='/public?command=[method]'.replace('\[method\]',req.query.method);
     } else if (req.query.method=='returnTradeHistory') { //trades
-        var d=parseInt((((new Date()).getTime())-1000*60*4)/1000);
+        var d=parseInt((((new Date()).getTime())-1000*60*5)/1000);
         pairs=('/public?command=[method]&currencyPair=[pair]&start='+d+'&end=9999999999').replace('\[method\]',req.query.method).replace('\[pair\]',req.query.pair);
     } else { //orders
         pairs='/public?command=[method]&currencyPair=[pair]&depth=300'.replace('\[method\]',req.query.method).replace('\[pair\]',req.query.pair);

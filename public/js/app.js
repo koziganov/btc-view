@@ -5,6 +5,7 @@
 
 
 var glob={
+    interval_ids:[],
     tick_interval:15000, //!!
     remove_delay:300,
     trade_percent_asks:20, //ордера на продажу: на сколько заглядывать в стаканы (по value) для установки цены продажи
@@ -584,8 +585,10 @@ Ext.onReady(function () {
 
                     var pair_id=newTab.id;
 
-                    if (!glob.ticker) {
-                        clearInterval(glob.ticker)
+                    if (glob.ticker) {
+                        //console.log(glob.interval_ids,glob.ticker)
+                        clearInterval(glob.ticker);
+                        delete glob.ticker;
                     }
 
                     glob.asks=[];
@@ -600,6 +603,7 @@ Ext.onReady(function () {
 
                     build_pair_info(pair_id);
                     glob.ticker=setInterval(build_pair_info,glob.tick_interval,pair_id);
+                    glob.interval_ids.push(glob.ticker)
 
                     //newTab.addCls('emp_loaded')
                 }
@@ -690,12 +694,15 @@ Ext.onReady(function () {
         //console.log("first_pair="+first_pair);
 
 
-        if (!glob.ticker) {
-            clearInterval(glob.ticker)
+        if (glob.ticker) {
+            console.log(glob.interval_ids,glob.ticker);
+            clearInterval(glob.ticker);
+            delete glob.ticker
         }
 
         build_pair_info(first_pair);
         glob.ticker=setInterval(build_pair_info,glob.tick_interval,first_pair);
+        glob.interval_ids.push(glob.ticker)
 
         //$(".x-grid-row-summary .x-grid-cell").css("background-color","gray")
 

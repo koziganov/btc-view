@@ -621,7 +621,7 @@ Ext.onReady(function () {
                 tabchange: function (tabs, newTab, oldTab) {
                     var pair_id=newTab.id;
 
-                    if (!glob.ticker) {
+                    if (glob.ticker) {
                         clearInterval(glob.ticker)
                     }
 
@@ -781,7 +781,7 @@ Ext.onReady(function () {
         //console.log("first_pair="+first_pair);
 
 
-        if (!glob.ticker) {
+        if (glob.ticker) {
             clearInterval(glob.ticker)
         }
 
