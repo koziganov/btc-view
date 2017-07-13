@@ -117,7 +117,27 @@ Ext.onReady(function () {
 
 
                 //последняя цена
-                trades_grid.down('displayfield').setValue(trades_data[0].price);
+                //trades_grid.down('displayfield').setValue(trades_data[0].price);
+
+                function trades_tab(trades_grid,trades_data){
+                    var start=trades_data[0].timestamp;
+                    var orders=0;
+                    var value=0;
+
+                    for(var k=0;k<trades_data.length;k++){
+                        var rec=trades_data[k];
+                        if (rec.timestamp<(start-60)){
+                            break;
+                        }
+                        orders++;
+                        value+=rec.amount;
+                    }
+                    //var dt=new Date(value*1000);
+                    var f1=trades_grid.down('displayfield').setValue(orders+' o/m');
+                    var p=f1.next().next().setValue(trades_data[0].price);
+                    p.next().next().setValue(round(value,4)+' v/m');
+                }
+                trades_tab(trades_grid,trades_data);
 
                 var store=trades_grid.getStore();
                 store.removeAll();
@@ -472,6 +492,9 @@ Ext.onReady(function () {
                 },
 
                 tbar: [
+                    {
+                        xtype: 'displayfield'
+                    },
                     '->',
                     {
                         xtype: 'displayfield',
@@ -480,7 +503,10 @@ Ext.onReady(function () {
                             return '<b>'+v+'</b> '+edizm
                         }
                     },
-                    '->'
+                    '->',
+                    {
+                        xtype: 'displayfield'
+                    }
                 ],
 
                 singleSelect: false,
@@ -559,6 +585,25 @@ Ext.onReady(function () {
                         text: 'type', dataIndex: 'type', flex: 1,
                         renderer: function(value){
                             return value=='bid' ? "покупка" : "продажа"
+                        }
+                    },
+                    {
+                        text:'time',
+                        dataIndex:'timestamp',
+                        flex:1,
+                        renderer: function(value){
+                            var dt=new Date(value*1000);
+
+                            var h=dt.getHours()+'';
+                            if (h.length==1) {h='0'+h}
+
+                            var m=dt.getMinutes()+'';
+                            if (m.length==1) {m='0'+m}
+
+                            var s=dt.getSeconds()+'';
+                            if (s.length==1) {s='0'+s}
+
+                            return h+":"+m+":"+s;
                         }
                     }
 
