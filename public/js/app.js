@@ -25,11 +25,6 @@ Ext.onReady(function () {
 
     Ext.QuickTips.init();
 
-    $.post("/view?method=info","",function(j){
-        glob.info=j;
-        BuildMainTabs(j)
-    });
-
     function accum_func(data){
 
         console.log('cur1',data[0]);
@@ -82,6 +77,15 @@ Ext.onReady(function () {
                 glob.orders=orders[0];
                 glob.trades=trades[0];
 
+                //ордера в виде графика
+                /*
+                if (glob.show_orders_graph_id){
+                    clearInterval(glob.show_orders_graph_id);
+                    delete glob.show_orders_graph_id;
+                }
+                */
+                show_orders_graph(pair_id, glob.orders);
+                //glob.show_orders_graph_id=setInterval(show_orders_graph,glob.tick_interval,pair_id, glob.orders);
                 //console.log("then="+pair_id);
 
                 var tab=Ext.getCmp(pair_id).down('panel');
@@ -696,6 +700,8 @@ Ext.onReady(function () {
                         },
                         {
                             xtype: 'panel',
+                            id:'graph',
+                            html:'<div id="graph_svg"></div>',
                             flex: 3,
                             layout: {
                                 type: 'vbox',
@@ -741,22 +747,17 @@ Ext.onReady(function () {
             ]//items-viewport
         }); //viewPort
 
-        //запускаем периодическое обновление
-        //console.log("first_pair="+first_pair);
-
+        add_svg();
 
         if (glob.ticker) {
-            console.log(glob.interval_ids,glob.ticker);
+            console.log(glob.interval_ids, glob.ticker);
             clearInterval(glob.ticker);
             delete glob.ticker
         }
 
         build_pair_info(first_pair);
-        glob.ticker=setInterval(build_pair_info,glob.tick_interval,first_pair);
+        glob.ticker = setInterval(build_pair_info, glob.tick_interval, first_pair);
         glob.interval_ids.push(glob.ticker)
-
-        //$(".x-grid-row-summary .x-grid-cell").css("background-color","gray")
-
     }
 
 
@@ -808,5 +809,12 @@ Ext.onReady(function () {
     });
     Ext.getBody().on('keydown', F1F3);
     //end hotkeys==
+
+
+    $.post("/view?method=info","",function(j){
+        glob.info=j;
+        BuildMainTabs(j)
+    });
+
 
 }); //onReady

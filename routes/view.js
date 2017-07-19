@@ -41,7 +41,8 @@ router.all('/', function(req, res, next) {
     if (req.query.method=='info'){
         pairs=pairs.replace('\[method\]/\[pairs\]',req.query.method)
     } else {
-        pairs=pairs.replace('\[method\]',req.query.method).replace('\[pairs\]',req.query.pairs)+"?limit=300";
+        var limit=req.query.method=='trades' ? 100 : 300;
+        pairs=pairs.replace('\[method\]',req.query.method).replace('\[pairs\]',req.query.pairs)+"?limit="+limit;
     }
 
     //res.send(pairs)

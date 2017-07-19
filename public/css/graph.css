@@ -1,0 +1,47 @@
+.domain {
+    stroke: lightgray;
+}
+.tick line {
+    stroke: #eee;
+}
+
+.tick line:hover {
+    stroke: orange;
+}
+
+.axis {
+    fill: lightgray;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: lightgray;
+    shape-rendering: crispEdges;
+}
+
+.x.axis path {
+//display: none;
+}
+
+.x.axis  {
+    cursor: pointer;
+    fill: lightblue;
+}
+
+
+.line.l1 {
+    fill: none;
+    stroke: #29b41b;
+    stroke-width: 1.5px;
+    fill-opacity: 0.8;
+    opacity: 0.8;
+}
+
+.line.l2 {
+    fill: none;
+    stroke: red;
+    stroke-width: 1.5px;
+    fill-opacity: 0.8;
+    opacity: 0.8;
+}
